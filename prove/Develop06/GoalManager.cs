@@ -51,11 +51,16 @@ public class GoalManager
                         bool isCompleted = bool.Parse(parts[4]);
                         var simpleGoal = new SimpleGoal(name, description, points);
                         if (isCompleted) simpleGoal.RecordCompleted();
-                        _goals.Add(simpleGoal); break;
+                        _goals.Add(simpleGoal);
+                        Console.WriteLine("File has been loaded successfully.");
+                        break;
+
                     case "EternalGoal":
                         var eternalGoal = new EternalGoal(name, description, points);
                         _goals.Add(eternalGoal);
+                        Console.WriteLine("File has been loaded successfully.");
                         break;
+
                     case "ChecklistGoal":
                         int targetToComplete = int.Parse(parts[4]);
                         int targetCompleted = int.Parse(parts[5]);
@@ -63,6 +68,7 @@ public class GoalManager
                         var checklistGoal = new ChecklistGoal(name, description, points, targetToComplete, bonusPoints);
                         for (int i = 0; i < targetCompleted; i++) checklistGoal.RecordCompleted();
                         _goals.Add(checklistGoal);
+                        Console.WriteLine("File has been loaded successfully.");
                         break;
 
                 }
