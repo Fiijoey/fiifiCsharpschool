@@ -8,19 +8,16 @@ public class Program
 
         while (true)
         {
-            Console.WriteLine();
-            goalManager.DisplayScore();
-            Console.WriteLine();
-
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1. Create Simple Goal");
             Console.WriteLine("2. Create Eternal Goal");
             Console.WriteLine("3. Create Checklist Goal");
             Console.WriteLine("4. Complete Goal");
-            Console.WriteLine("5. Display Goals");
-            Console.WriteLine("6. Save Goals");
-            Console.WriteLine("7. Load Goals");
-            Console.WriteLine("8. Quit");
+            Console.WriteLine("5. Display Score");
+            Console.WriteLine("6. Display Goals");
+            Console.WriteLine("7. Save Goals");
+            Console.WriteLine("8. Load Goals");
+            Console.WriteLine("9. Quit");
 
             string choice = Console.ReadLine();
 
@@ -63,19 +60,22 @@ public class Program
                     goalManager.MarkGoalCompleted(goalName);
                     break;
                 case "5":
-                    goalManager.DisplayDetails();
+                    goalManager.DisplayScore();
                     break;
                 case "6":
+                    goalManager.DisplayDetails();
+                    break;
+                case "7":
                     Console.Write("Enter filename to save: ");
                     string saveFilename = Console.ReadLine();
                     goalManager.SaveGoalList(saveFilename);
                     break;
-                case "7":
+                case "8":
                     Console.Write("Enter filename to load: ");
                     string loadFilename = Console.ReadLine();
                     goalManager.LoadGoalList(loadFilename);
                     break;
-                case "8":
+                case "9":
                     return;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
