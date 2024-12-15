@@ -16,6 +16,7 @@ public class GoalManager
     public void CreateGoal(Goal goal)
     {
         _goals.Add(goal);
+        Console.WriteLine($"Goal '{goal.GoalName}' has been added.");
     }
 
     public void SaveGoalList(string filename)
@@ -24,7 +25,9 @@ public class GoalManager
         {
             foreach (var goal in _goals)
             {
-                writer.WriteLine(goal.ReadFile());
+                string goalType = goal.GetType().Name;
+                writer.WriteLine($"{goalType},{goal.ReadFile()}");
+                Console.WriteLine("File has been save successfully.");
             }
         }
     }
