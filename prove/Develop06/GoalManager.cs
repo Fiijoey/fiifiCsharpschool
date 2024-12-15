@@ -37,8 +37,32 @@ public class GoalManager
             string line;
             while ((line = reader.ReadLine()) != null)
             {
-                // Parse the line and create appropriate Goal objects
-                // Add them to the _goals list
+                var parts = line.Split(',');
+                string goalType = parts[0];
+                string name = parts[1];
+                string description = parts[2];
+                int points = int.Parse(parts[3]);
+                switch (goalType)
+                {
+                    case "SimpleGoal":
+                        bool isCompleted = bool.Parse(parts[4]);
+                        var simpleGoal = new SimpleGoal(name, description, points);
+                        if (isCompleted) simpleGoal.RecordCompleted();
+                        _goals.Add(simpleGoal); break;
+                    case "EternalGoal":
+                        var eternalGoal = new EternalGoal(name, description, points);
+                        _goals.Add(eternalGoal);
+                        break;
+                    case "ChecklistGoal":
+                        int targetToComplete = int.Parse(parts[4]);
+                        int targetCompleted = int.Parse(parts[5]);
+                        int bonusPoints = int.Parse(parts[6]);
+                        var checklistGoal = new ChecklistGoal(name, description, points, targetToComplete, bonusPoints);
+                        for (int i = 0; i < targetCompleted; i++) checklistGoal.RecordCompleted();
+                        _goals.Add(checklistGoal);
+                        break;
+
+                }
             }
         }
     }
